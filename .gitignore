@@ -128,5 +128,6 @@ dmypy.json
 # Pyre type checker
 .pyre/
 
-# Don't commit data
+# Don't commit data or packages
 data/
+aws/
