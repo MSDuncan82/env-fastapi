@@ -4,7 +4,7 @@
 # GLOBALS                                                                       #
 #################################################################################
 
-# PROJECT_NAME = {{ project name }}
+# APP_NAME = {{ project name }}
 PROJECT_DIR := $(shell dirname $(realpath $(lastword $(MAKEFILE_LIST))))
 BUCKET = # {{ bucket name }}
 PROFILE = default
@@ -19,9 +19,16 @@ install_requirements:
 	$(PYTHON_INTERPRETER) -m pip install -U pip setuptools wheel
 	$(PYTHON_INTERPRETER) -m pip install -r requirements.txt
 
-## Set up Dev Container
+## Run Servers, Kernels etc.
+run:
+	python app_name/run.py
+
 jupyter: install_requirements
 	jupyter lab --port=8888 --no-browser --ip=0.0.0.0 --allow-root
+
+## Set up Dev Container
+rename:
+	find ./ -type f -exec sed -i -e 's/app_name/$(APP_NAME)/g' {} \;
 
 requirements:
 	bash/make_requirements.sh

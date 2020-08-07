@@ -1,4 +1,4 @@
-FROM continuumio/anaconda3
+FROM continuumio/miniconda3
 
 RUN apt-get update \
     && export DEBIAN_FRONTEND=noninteractive \
@@ -28,12 +28,12 @@ RUN apt-get update \
         ipdb \
         black \
         psycopg2 \
-        catboost \
-        xgboost \
         fastapi \
-        unicorn \
+        uvicorn \
         nb_black \
-        
+        jinja2 \
+        aiofiles \
+        dash \
     #
     # Clean up
     && apt-get autoremove -y \
@@ -42,4 +42,5 @@ RUN apt-get update \
 
 EXPOSE 8888
 EXPOSE 5432
+EXPOSE 5700
 
